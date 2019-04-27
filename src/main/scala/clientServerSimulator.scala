@@ -31,13 +31,20 @@ object clientServerSimulator extends App {
     // the jvm’s main thread alive
     sleep(5000)
 
+
+
+
+
+
     def sleep(time: Long): Unit = Thread.sleep(time)
 
     // a simulated web service
     def getFilteredImage(image: String): Future[Double] = Future {
         val r = scala.util.Random
+
         val randomSleepTime = r.nextInt(3000)
         println(s"For $image, sleep time is $randomSleepTime")
+
         val randomPrice = r.nextDouble * 1000
         sleep(randomSleepTime)
         randomPrice
