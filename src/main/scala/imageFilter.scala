@@ -1,9 +1,11 @@
+package main
+
 import java.io.File
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
 import java.awt.Color
 
-object imageFilter {
+class imageFilter {
 	def median(list: List[Int]): Int = {
 		val seq = list.sortWith(_ < _)
 
