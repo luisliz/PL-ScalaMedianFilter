@@ -1,0 +1,51 @@
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/Users/luisliz/Documents/GitHub/ScalaMedianFilter/src/main/scala/clientServerSimulator.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(main.Main, main.clientServerSimulator)[0m
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(main.Main, main.clientServerSimulator)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/Users/luisliz/Documents/GitHub/ScalaMedianFilter/src/main/scala/clientServerSimulator.scala)[0m
+[0m[[0m[0minfo[0m] [0m[0mCompiling 1 Scala source to /Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/classes ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.2.5:compile for Scala 2.12.8[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.2.5:compile for Scala 2.12.8[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 13ec357d for Scala compiler version 2.12.8[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/Users/luisliz/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.8.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/classes:/Users/luisliz/.ivy2/cache/com.typesafe.akka/akka-actor_2.10/jars/akka-actor_2.10-2.2-M1.jar:/Users/luisliz/.ivy2/cache/com.typesafe/config/bundles/config-1.0.0.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 0.403815203 s[0m
+[0m[[0m[0minfo[0m] [0m[0mDone compiling.[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from main.clientServerSimulator...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: Set(main.clientServerSimulator)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(main.clientServerSimulator)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(main.clientServerSimulator,ModifiedNames(changes = UsedName(receive,[Default]), UsedName(postRestart,[Default]), UsedName(##,[Default]), UsedName($init$,[Default]), UsedName(postStop,[Default]), UsedName(clone,[Default]), UsedName(isInstanceOf,[Default]), UsedName(synchronized,[Default]), UsedName(context,[Implicit]), UsedName(preRestart,[Default]), UsedName(main;clientServerSimulator;init;,[Default]), UsedName(notifyAll,[Default]), UsedName(sender,[Default]), UsedName(clientServerSimulator,[Default]), UsedName(wait,[Default]), UsedName(preStart,[Default]), UsedName(equals,[Default]), UsedName(notify,[Default]), UsedName(ne,[Default]), UsedName(unhandled,[Default]), UsedName($asInstanceOf,[Default]), UsedName(self,[Implicit]), UsedName(asInstanceOf,[Default]), UsedName(eq,[Default]), UsedName(finalize,[Default]), UsedName(toString,[Default]), UsedName(==,[Default]), UsedName(!=,[Default]), UsedName(supervisorStrategy,[Default]), UsedName(Receive,[Default]), UsedName(getClass,[Default]), UsedName($isInstanceOf,[Default]), UsedName(hashCode,[Default]))) invalidates 1 classes due to The main.clientServerSimulator has the following implicit definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(context,[Implicit]), UsedName(self,[Implicit]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(main.clientServerSimulator)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from main.HelloActor...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: Set(main.HelloActor)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(main.HelloActor)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(main.HelloActor,ModifiedNames(changes = UsedName(receive,[Default]), UsedName(HelloActor,[Default]), UsedName(postRestart,[Default]), UsedName(##,[Default]), UsedName($init$,[Default]), UsedName(postStop,[Default]), UsedName(clone,[Default]), UsedName(isInstanceOf,[Default]), UsedName(synchronized,[Default]), UsedName(context,[Implicit]), UsedName(preRestart,[Default]), UsedName(notifyAll,[Default]), UsedName(sender,[Default]), UsedName(wait,[Default]), UsedName(preStart,[Default]), UsedName(equals,[Default]), UsedName(notify,[Default]), UsedName(ne,[Default]), UsedName(unhandled,[Default]), UsedName($asInstanceOf,[Default]), UsedName(self,[Implicit]), UsedName(asInstanceOf,[Default]), UsedName(eq,[Default]), UsedName(finalize,[Default]), UsedName(toString,[Default]), UsedName(==,[Default]), UsedName(!=,[Default]), UsedName(main;HelloActor;init;,[Default]), UsedName(supervisorStrategy,[Default]), UsedName(Receive,[Default]), UsedName(getClass,[Default]), UsedName($isInstanceOf,[Default]), UsedName(hashCode,[Default]))) invalidates 1 classes due to The main.HelloActor has the following implicit definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(context,[Implicit]), UsedName(self,[Implicit]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(main.HelloActor)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
+[0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mPreviously invalidated, but (transitively) depend on new invalidations:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll newly invalidated classes after taking into account (previously) recompiled classes:Set()[0m

@@ -1,98 +1,180 @@
 package main
 
+import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import java.io.File
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO
+import java.awt.image.BufferedImage
+import java.awt.Graphics2D
 
-import java.awt.{Graphics2D};
+object imageFilter {
+	def median(list: List[Int]): Int = {
+		val seq = list.sortWith(_ < _)
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-import scala.util.{Failure, Success}
-
-object clientServerSimulator extends App {
-	val startTime = currentTime
-
-	// (a) create 2 images
-	val serialImage = serialFilterImage("images/girl.png")
-	val parallelImage = serialFilterImage("images/girl.png")
-
-	// (b) get a combined result in a for-comprehension
-	val result: Future[(BufferedImage, BufferedImage)] = for {
-		serialImage <- serialImage
-		parallelImage <- parallelImage
-	} yield (serialImage, parallelImage)
-
-	// (c) do whatever you need to do with the results
-	result.onComplete {
-		case Success(x) => {
-			val endTime = deltaTime(startTime)
-			println(s"In Success case, time delta: ${endTime}")
-			println(s"Median Filtered image generated")
+		if (seq.size % 2 == 1) {
+			seq(seq.size / 2)
+		} else {
+			val (up, down) = seq.splitAt(seq.size / 2)
+			(up.last + down.head) / 2
 		}
-		case Failure(e) => e.printStackTrace
 	}
 
-	// important for a little parallel demo: need to keep
-	// the jvm’s main thread alive
-	sleep(5000)
+	def medianFilter(img: BufferedImage): BufferedImage = {
+		// obtain width and height of image
+		val w = img.getWidth
+		val h = img.getHeight
 
-	def sleep(time: Long): Unit = Thread.sleep(time)
+		// create new image of the same size
+		val out = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB)
+		for (x <- 0 until w)
+			for (y <- 0 until h)
+				out.setRGB(x, y, img.getRGB(w - x - 1, y) & 0xffffff)
 
-	def serialFilterImage(image: String): Future[BufferedImage] = Future {
-		val r = scala.util.Random
+		var size = 3
+		var blockSize = List[Int](size * size)
+		var count = 0
 
-		val randomSleepTime = r.nextInt(3000)
-		println(s"For $image, sleep time is $randomSleepTime")
+		for (x <- 1 until w) {
+			for (y <- 1 until h) {
+				blockSize = List[Int](size * size)
 
-		// read original image, and obtain width and height
-		val imageFilter = new imageFilter
-		val photo1 = ImageIO.read(new File(image))
-		val photo2 = imageFilter.phototest(photo1)
+				for (kx <- x - (size) until x + (size))
+					for (ky <- y - (size) until y + (size))
+						if (!(kx < 0 || kx >= w || ky < 0 || ky >= h)) {
+							val p = img.getRGB(kx, ky)
+							blockSize = p :: blockSize
+						}
 
-		// save image to file "test.jpg"
-		ImageIO.write(photo2, "png", new File("images/processed/medianFilteredImage.png"))
-
-		sleep(randomSleepTime)
-		photo2
+				var a = median(blockSize)
+				for (kx <- x - (size) until x + (size))
+					for (ky <- y - (size) until y + (size))
+						if (!(kx < 0 || kx >= w || ky < 0 || ky >= h))
+							out.setRGB(kx, ky, a)
+			}
+		}
+		out
 	}
 
 
-	/*def parallelFilteredImage(image: String): Future[BufferedImage] = Future {
-		val orig = ImageIO.read(new File(image))
+	def parallelMedianFilter(img: BufferedImage, cores: Int): BufferedImage = {
+		var rows = 1
+		var cols = 1
 
-		val division = 2
-		val chunkWidth = orig.getWidth() / division // determines the chunk width and height
-		val chunkHeight = orig.getHeight() / division;
-		var count = 0;
+		if(img.getWidth>=img.getHeight)
+			cols = cores
+		else
+			rows = cores
 
 
-		val imgs = new BufferedImage[Int](division * division)
 
-		for (x <- 0 until division) {
-			for (y <- 0 until division) {
-				//Initialize the image array with image chunks
-				imgs = new BufferedImage(chunkWidth, chunkHeight, BufferedImage.TYPE_INT_RGB) :: imgs
 
-				// draws the image chunk
-				count += 1
-				var gr: Graphics2D = (imgs(count)).createGraphics()
+		val chunkWidth = img.getWidth / cols // determines the chunk width and height
+		val chunkHeight = img.getHeight / rows
 
+		var imgs = List[BufferedImage]() //Image array to hold image chunks
+
+		for (x <- 0 until rows) {
+			for (y <- 0 until cols) {
+				val image: BufferedImage = new BufferedImage(chunkWidth, chunkHeight, img.getType())
+
+
+				val gr: Graphics2D = img.createGraphics()
 				gr.drawImage(image, 0, 0, chunkWidth, chunkHeight, chunkWidth * y, chunkHeight * x, chunkWidth * y + chunkWidth, chunkHeight * x + chunkHeight, null);
 				gr.dispose();
+
+				imgs = img :: imgs
 			}
 		}
 
-		/*val futures = Seq[Future[BufferedImage]] = Seq(imgs).map(serialFilterImage)
+		val res = imgs.par.map(medianFilter).toList.reverse
+
+		val newImage = new BufferedImage(img.getWidth, img.getHeight, BufferedImage.TYPE_INT_ARGB)
+		val g2 = newImage.createGraphics
+
+		var count = 0
+		var lastWidth = 0
+		var lastHeight = 0
+		for(x <- 0 until rows) {
+			val nextWidth = lastWidth + res(count).getWidth()
+			lastHeight = 0
+			for (y <- 0 until cols) {
+				val nextHeight = lastHeight + res(count).getHeight()
+				g2.drawImage(res(count), null, lastHeight, lastWidth)
+				lastHeight = nextHeight
+				count += 1
+			}
+			lastWidth=nextWidth
+		}
+		newImage
+	}
+}
 
 
-		a <-
-	} yield {*/
-
-	}*/
-
+object clientServerSimulator {
 	def currentTime = System.currentTimeMillis()
 
 	def deltaTime(t0: Long) = currentTime - t0
 }
+
+class SerialMedianFilterServer extends Actor {
+	def receive = {
+		case image: BufferedImage => {
+			val startTime = clientServerSimulator.currentTime
+			val filteredImage = imageFilter.medianFilter(image)
+			val endTime = clientServerSimulator.deltaTime(startTime).toInt
+
+			sender() ! ServerResponse("Parallel Filter", filteredImage, endTime, self)
+		}
+		case _ => println("No image provided")
+	}
+}
+
+case class ServerResponse(serverName: String, image: BufferedImage, endTime: Int, target: ActorRef)
+
+class ParallelMedianFilterServer extends Actor {
+	def receive = {
+		case image: BufferedImage => {
+			val startTime = clientServerSimulator.currentTime
+			val filteredImage =imageFilter.parallelMedianFilter(image,6)
+			val endTime = clientServerSimulator.deltaTime(startTime).toInt
+
+			sender() ! ServerResponse("Parallel Filter", filteredImage, endTime, self)
+		}
+		case _ => println("No image provided")
+	}
+}
+
+class client extends Actor {
+	def receive = {
+		case image: BufferedImage => {
+			val serialServerActor = context.actorOf(Props[SerialMedianFilterServer], name = "serialActor")
+	 		val parallelServerActor = context.actorOf(Props[ParallelMedianFilterServer], name = "parallelActor")
+
+			serialServerActor ! image
+			parallelServerActor ! image
+		}
+
+		case data: ServerResponse => println("Response from: " + data.serverName + "\tTime: "+data.endTime+"\n\timage: "+ data.image)
+
+		case _ => println("No image or reply from server")
+	}
+}
+
+object Main extends App {
+	val system = ActorSystem("MedianFilter")
+	val image: BufferedImage = ImageIO.read(new File("images/boat.png"))
+
+	//Creating server actors
+	val client = system.actorOf(Props[client], name = "client")
+
+	client ! image
+
+
+}
+
+
+
+
+
+
+

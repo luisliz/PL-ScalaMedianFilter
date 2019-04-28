@@ -1,0 +1,17 @@
+[0m[[0m[0minfo[0m] [0m[0mPackaging /Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/scalamedianfilter_2.12-0.1.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/classes/main[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main/HelloActor$$anonfun$receive$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/classes/main/HelloActor$$anonfun$receive$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main/imageFilter.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/classes/main/imageFilter.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main/Main$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/classes/main/Main$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main/Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/classes/main/Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main/HelloActor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/classes/main/HelloActor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main/Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/luisliz/Documents/GitHub/ScalaMedianFilter/target/scala-2.12/classes/main/Main.class[0m
+[0m[[0m[0minfo[0m] [0m[0mDone packaging.[0m
