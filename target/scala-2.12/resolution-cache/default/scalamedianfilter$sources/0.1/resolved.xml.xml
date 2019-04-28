@@ -4,7 +4,7 @@
 		module="scalamedianfilter$sources"
 		revision="0.1"
 		status="integration"
-		publication="20190428015819"
+		publication="20190428102521"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>
